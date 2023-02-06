@@ -3,6 +3,7 @@ package net.nussi.kudo.core;
 import net.nussi.kudo.core.database.DatabaseController;
 import net.nussi.kudo.core.database.records.PlayerRecord;
 import net.nussi.kudo.core.database.records.PlayerRecordBuilder;
+import net.nussi.kudo.core.database.records.PlayerRecordHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,19 +25,17 @@ public final class KudoCore extends JavaPlugin {
         DatabaseController.onEnable();
 
 
-        ArrayList<PlayerRecord> records = new ArrayList<>();
-        for(Player player : getServer().getOnlinePlayers()) {
-            records.add(PlayerRecordBuilder.CreateFromPlayer(player));
-        }
-
-        if(!records.isEmpty()) DatabaseController.playersCollection.insertMany(records);
+        // Add Player Handler
+        getServer().getPluginManager().registerEvents(new PlayerRecordHandler(), this);
+        PlayerRecordHandler.onEnable();
 
     }
 
     @Override
     public void onDisable() {
 
-
+        // Player Handler
+        PlayerRecordHandler.onDisable();
 
         // DISCONNECT DATABASE
         DatabaseController.onDisable();
