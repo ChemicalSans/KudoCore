@@ -1,0 +1,9 @@
+name: KudoCore
+version: '${project.version}'
+main: net.nussi.kudo.core.KudoCore
+api-version: 1.19
+prefix: Kudo-Core
+load: STARTUP
+authors: [ ChemicalSans, DaNussi ]
+description: Part of the Kudo server network!
+website: nussi.net
