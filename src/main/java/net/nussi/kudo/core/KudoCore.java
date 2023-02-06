@@ -26,10 +26,10 @@ public final class KudoCore extends JavaPlugin {
 
         ArrayList<PlayerRecord> records = new ArrayList<>();
         for(Player player : getServer().getOnlinePlayers()) {
-            records.add(new PlayerRecordBuilder().setPlayer(player).createPlayerRecord());
+            records.add(PlayerRecordBuilder.CreateFromPlayer(player));
         }
 
-        DatabaseController.playersCollection.insertMany(records);
+        if(!records.isEmpty()) DatabaseController.playersCollection.insertMany(records);
 
     }
 

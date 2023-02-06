@@ -1,34 +1,16 @@
 package net.nussi.kudo.core.database.records;
 
+import net.nussi.kudo.core.KudoConfig;
 import org.bukkit.entity.Player;
 
 public class PlayerRecordBuilder {
-    private Player player;
-    private String uuid;
-    private String name;
-    private String server;
 
-    public PlayerRecordBuilder setPlayer(Player player) {
-        this.player = player;
-        return this;
+    public static PlayerRecord CreateFromPlayer(Player player) {
+        return new PlayerRecord(
+                player.getUniqueId().toString(),
+                player.getName(),
+                KudoConfig.ServerName
+        );
     }
 
-    public PlayerRecordBuilder setUuid(String uuid) {
-        this.uuid = uuid;
-        return this;
-    }
-
-    public PlayerRecordBuilder setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public PlayerRecordBuilder setServer(String server) {
-        this.server = server;
-        return this;
-    }
-
-    public PlayerRecord createPlayerRecord() {
-        return new PlayerRecord(player);
-    }
 }
